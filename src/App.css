@@ -490,11 +490,16 @@ body {
   padding: 0.75rem 1.25rem 1.25rem;
 }
 
+.export-notes {
+  margin-top: 0.6rem;
+  padding-left: 1.2rem;
+  text-align: left;
+}
+
 .export-note {
   margin-top: 0.4rem;
   font-size: 0.76rem;
   color: #94a3b8;
-  text-align: center;
 }
 
 /* ===== Buttons ===== */
@@ -538,3 +543,29 @@ body {
 }
 
 .btn-secondary:hover { border-color: #6366f1; color: #6366f1; }
+
+
+/* ===== Footer ===== */
+.app-footer {
+  margin-top: 2.5rem;
+  padding: 1.25rem 1rem;
+  border-top: 1px solid #e2e8f0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.app-footer p {
+  font-size: 0.78rem;
+  color: #94a3b8;
+}
+
+.app-footer a {
+  color: #6366f1;
+  text-decoration: none;
+}
+
+.app-footer a:hover {
+  text-decoration: underline;
+}

@@ -476,17 +476,27 @@ export default function App() {
                 <button className="btn btn-primary" onClick={handleExport} disabled={exporting}>
                   {exporting ? '⏳ Generating…' : 'Export Clean .docx'}
                 </button>
-                <p className="export-note">
-                  Fixes formatting issues (symbols, dashes, spacing). Structural issues like stacked roles or stacked degrees must be corrected manually in your resume first.
-                </p>
-                {inputFormat === 'pdf' && (
-                  <p className="export-note">PDF uploads: the exported .docx is rebuilt from extracted text only — original formatting is not preserved.</p>
-                )}
+                <ul className="export-notes">
+                  <li className="export-note">Fixes formatting issues (symbols, dashes, spacing). Structural issues like stacked roles or stacked degrees must be corrected manually in your resume first.</li>
+                  {inputFormat === 'pdf' && (
+                    <li className="export-note">PDF uploads: The exported .docx is rebuilt from extracted text only — original formatting is not preserved.</li>
+                  )}
+                  {(inputFormat === 'docx' || inputFormat === 'doc') && (
+                    <li className="export-note">Some layout issues — like multi-column formatting — can't be reliably detected from Word files. If your resume uses columns or text boxes, treat this as a partial check.</li>
+                  )}
+                </ul>
               </div>
             </section>
           </div>
         )}
       </main>
+
+      <footer className="app-footer">
+        <p>🔒 Your file never leaves your browser — everything is processed locally on your device. Nothing is uploaded, stored, or sent to any server.</p>
+        <p>🔧 For broader ATS (applicant tracking system) optimization in your resume and job applications, also check out <a href="https://werkal.com" target="_blank" rel="noopener noreferrer">Werkal</a> and <a href="https://chromewebstore.google.com/detail/simplify-copilot-autofill/pbanhockgagggenencehbnadejlgchfc" target="_blank" rel="noopener noreferrer">Simplify Copilot</a>.</p>
+        <p>ℹ️ This tool is not affiliated with Workday, any ATS job portal, Simplify Copilot, or Werkal.</p>
+        <p>💬 Have a bug to report or a suggestion? <a href="https://forms.gle/MhKxYwLtiyCQ6EFD7" target="_blank" rel="noopener noreferrer">Let us know here.</a></p>
+      </footer>
     </div>
   );
 }
