@@ -372,6 +372,7 @@ export default function App() {
       <header className="app-header">
         <h1>Workday Resume Auditor</h1>
         <p className="subtitle">Check if your resume survives Workday's ATS parser</p>
+        <p className="subtitle-desc">Tired of Workday mangling your resume autofill? Upload your resume to see exactly what's causing parsing errors and export a clean, ATS-optimized version.</p>
       </header>
 
       <main className="app-main">
