@@ -192,6 +192,13 @@ export const RED_FLAGS = {
     description: 'Workday has a dedicated Skills field it autofills from a clearly labeled Skills section. Without one, your skills won\'t be captured during autofill.',
     penalty: 0,
   },
+  SKILLS_HEADER_NOT_STANDALONE: {
+    id: 'skills_header_not_standalone',
+    severity: 'warning',
+    label: 'Skills section header is not on its own line',
+    description: 'Your skills heading shares a line with other content (e.g. separated by a pipe). Workday scans for a standalone "Skills" or "Technical Skills" heading — if it\'s mixed with other text, the skills section may not be recognized and won\'t autofill.',
+    penalty: 1,
+  },
   YEAR_ONLY_DATES: {
     id: 'year_only_dates',
     severity: 'warning',
@@ -460,8 +467,14 @@ export function analyzeResume(text, meta = {}) {
 
   // ── No skills section ─────────────────────────────────────────────────────
   const SKILLS_HEADER_RE = /^(technical\s+)?skills?\s*:?$|^core\s+competencies\s*:?$|^areas?\s+of\s+expertise\s*:?$|^competencies\s*:?$/i;
+  const SKILLS_KEYWORD_RE = /(technical\s+)?skills?|core\s+competencies|areas?\s+of\s+expertise|competencies/i;
   const hasSkillsSection = lines.slice(1).some(l => SKILLS_HEADER_RE.test(l.trim()));
-  if (!hasSkillsSection) flagsFound.push(RED_FLAGS.NO_SKILLS_SECTION);
+  const hasSkillsInPipeLine = !hasSkillsSection && lines.slice(1).some(l => l.includes('|') && SKILLS_KEYWORD_RE.test(l));
+  if (hasSkillsInPipeLine) {
+    flagsFound.push(RED_FLAGS.SKILLS_HEADER_NOT_STANDALONE);
+  } else if (!hasSkillsSection) {
+    flagsFound.push(RED_FLAGS.NO_SKILLS_SECTION);
+  }
 
   // ── Year-only date ranges ─────────────────────────────────────────────────
   // Flag date-range lines that have no month prefix (e.g. "2019 – 2022" instead of "Jan 2019 – Mar 2022")
@@ -510,6 +523,7 @@ export function analyzeResume(text, meta = {}) {
       case 'pipe_separator':          return 'Replace pipe separators (|) with commas or line breaks.';
       case 'fragmented_pdf_lines':    return 'Upload as .docx instead — PDF line breaks are baked into the file and can\'t be auto-fixed. If you must use PDF, manually join broken lines in the source document.';
       case 'no_skills_section':       return 'Add a clearly labeled "Skills" section. Workday autofills its Skills field by scanning for that heading.';
+      case 'skills_header_not_standalone': return 'Move your Skills heading to its own line. Remove any pipe separators or other content sharing that line.';
       case 'year_only_dates':         return `Add months to all date ranges — use "Jan 2019 – Mar 2022" instead of "2019 – 2022". Workday needs the month to fill Start Date and End Date fields.`;
       default:                         return f.description;
     }
