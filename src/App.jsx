@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { inject, track } from '@vercel/analytics';
+import { inject } from '@vercel/analytics';
 
 inject();
 
@@ -322,7 +322,7 @@ export default function App() {
       setResumeText(parsed.text);
       const analysis = analyzeResume(parsed.text, parsed.meta);
       setResult(analysis);
-      track('resume_uploaded', { format: ext, score: analysis.score });
+      window.gtag?.('event', 'resume_uploaded', { format: ext, score: analysis.score });
     } catch (err) {
       console.error(err);
       setError('Failed to parse file. ' + (err.message || ''));
@@ -508,7 +508,7 @@ export default function App() {
       </main>
 
       <footer className="app-footer">
-        <p>🔒 Your file never leaves your browser — everything is processed locally on your device. Nothing (no data or information) is uploaded, stored, or sent to any server.</p>
+        <p>🔒 Your file never leaves your browser — everything is processed locally on your device. No personal data or information is uploaded, stored, or sent to any server.</p>
         <p>🔧 For broader ATS (applicant tracking system) optimization in your resume and job applications, also check out <a href="https://chromewebstore.google.com/detail/simplify-copilot-autofill/pbanhockgagggenencehbnadejlgchfc" target="_blank" rel="noopener noreferrer">Simplify Copilot</a> and <a href="https://werkal.com" target="_blank" rel="noopener noreferrer">Werkal</a>.</p>
         <p>ℹ️ This tool is not affiliated with Workday, any ATS job portal, Simplify Copilot, or Werkal.</p>
         <p>💬 Have a bug to report or a suggestion? <a href="https://forms.gle/MhKxYwLtiyCQ6EFD7" target="_blank" rel="noopener noreferrer">Let us know here.</a></p>
