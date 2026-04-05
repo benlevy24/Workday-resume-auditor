@@ -510,8 +510,8 @@ export default function App() {
 
       <footer className="app-footer">
         <p>🔒 Your file never leaves your browser — everything is processed locally on your device. No personal data or information is uploaded, stored, or sent to any server.</p>
-        <p>🔧 For broader ATS (applicant tracking system) optimization in your resume and job applications, also check out <a href="https://chromewebstore.google.com/detail/simplify-copilot-autofill/pbanhockgagggenencehbnadejlgchfc" target="_blank" rel="noopener noreferrer">Simplify Copilot</a> and <a href="https://werkal.com" target="_blank" rel="noopener noreferrer">Werkal</a>.</p>
-        <p>ℹ️ This tool is not affiliated with Workday, any ATS job portal, Simplify Copilot, or Werkal.</p>
+        <p>🔧 For broader ATS (applicant tracking system) optimization in your resume and job applications, also check out <a href="https://chromewebstore.google.com/detail/simplify-copilot-autofill/pbanhockgagggenencehbnadejlgchfc" target="_blank" rel="noopener noreferrer">Simplify Copilot</a>, <a href="https://werkal.com" target="_blank" rel="noopener noreferrer">Werkal</a>, and <a href="https://youxai.app/" target="_blank" rel="noopener noreferrer">YouxAI</a>.</p>
+        <p>ℹ️ This tool is not affiliated with Workday, any ATS job portal, Simplify Copilot, Werkal, or YouxAI.</p>
         <p>💬 Have a bug to report or a suggestion? <a href="https://forms.gle/MhKxYwLtiyCQ6EFD7" target="_blank" rel="noopener noreferrer">Let us know here.</a></p>
       </footer>
     </div>
