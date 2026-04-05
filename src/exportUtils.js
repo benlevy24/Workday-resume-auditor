@@ -139,6 +139,12 @@ export async function exportToDocx(cleanText, fileName = 'resume') {
   triggerDownload(blob, `${baseName}-ats-safe.docx`);
 }
 
+export function exportToTxt(cleanText, fileName = 'resume') {
+  const baseName = fileName.replace(/\.(docx?|pdf)$/i, '');
+  const blob = new Blob([cleanText], { type: 'text/plain;charset=utf-8' });
+  triggerDownload(blob, `${baseName}-ats-safe.txt`);
+}
+
 function triggerDownload(blob, filename) {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
