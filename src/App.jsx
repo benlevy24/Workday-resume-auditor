@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { inject } from '@vercel/analytics';
+import { inject, track } from '@vercel/analytics';
 
 inject();
 
@@ -320,7 +320,9 @@ export default function App() {
     try {
       const parsed = (ext === 'docx' || ext === 'doc') ? await parseDocx(file) : await parsePdf(file);
       setResumeText(parsed.text);
-      setResult(analyzeResume(parsed.text, parsed.meta));
+      const analysis = analyzeResume(parsed.text, parsed.meta);
+      setResult(analysis);
+      track('resume_uploaded', { format: ext, score: analysis.score });
     } catch (err) {
       console.error(err);
       setError('Failed to parse file. ' + (err.message || ''));
